@@ -1,0 +1,63 @@
+################################################################################
+# compiler settings
+################################################################################
+CC   = cl
+CXX  = cl
+LD   = link
+AR   = lib
+
+CP   = copy
+RM   = del
+
+MOC  = moc-qt4
+MAKE = make
+
+################################################################################
+# LIB settings
+################################################################################
+RTK_CFLAGS = -nologo -Zm200 -O2 -MD -GR -EHsc -W3 -w34100 -w34189 \
+				 -DWIN32 -DRTK_WIN
+RTK_INC    = -I$(TOPDIR)/include
+RTK_LDFLAGS= /NOLOGO /DYNAMICBASE /NXCOMPAT /INCREMENTAL:NO \
+				-L$(TOPDIR)/lib/win32 \
+             	rtk_gui.lib rtk_utils.lib rtk_osa.lib rtk_pr.lib rtk_cv.lib
+
+
+################################################################################
+# OpenCV settings
+#   run: export PKG_CONFIG_PATH=/opt/OpenCV-2.4/lib/pkgconfig
+################################################################################
+OPENCV_CFLAGS = 
+OPENCV_LDFLAGS= opencv_calib3d248.lib opencv_contrib248.lib opencv_core248.lib \
+				opencv_features2d248.lib opencv_flann248.lib opencv_gpu248.lib \
+				opencv_highgui248.lib opencv_imgproc248.lib opencv_legacy248.lib \
+				opencv_ml248.lib opencv_nonfree248.lib opencv_objdetect248.lib \
+				opencv_ocl248.lib opencv_photo248.lib opencv_stitching248.lib \
+				opencv_superres248.lib opencv_ts248.lib opencv_video248.lib \
+				opencv_videostab248.lib 
+
+################################################################################
+# Qt settings
+################################################################################
+QT_CFLAGS = -DQT_DLL -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB \
+			-DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT \
+			-DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -DNDEBUG \
+			-I"$(QT_DIR)\include\QtCore" -I"$(QT_DIR)\include\QtGui" -I"$(QT_DIR)\include" \
+			-I"$(QT_DIR)\include\ActiveQt" -I"$(QT_DIR)\mkspecs\default"
+QT_LDFLAGS= /LIBPATH:"$(QT_DIR)\lib" \
+			QtGui4.lib QtCore4.lib QtMultimedia4.lib Qtnetwork4.lib QtOpenGL4.lib
+
+################################################################################
+# Eigen
+################################################################################
+EIGEN3_CFLAGS  = -I$(TOPDIR)/3rdparty/programs/eigen3
+EIGEN3_LDFLAGS = 
+
+################################################################################
+# All settings
+################################################################################
+ALL_CFLAGS    = $(RTK_CFLAGS) $(RTK_INC) $(OPENCV_CFLAGS) $(QT_CFLAGS) $(EIGEN3_CFLAGS)
+ALL_LDFLAGS   = $(RTK_LDFLAGS) $(OPENCV_LDFLAGS) $(QT_LDFLAGS) 
+ALL_MOC_FLAGS = $(RTK_INC) $(QT_CFLAGS)
+
+

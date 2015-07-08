@@ -1,0 +1,7 @@
+#!/bin/bash
+
+find $1 -iname *.o  -exec rm -f '{}' \;
+find $1 -iname *.e  -exec rm -f '{}' \;
+find $1 -iname *.a  -exec rm -f '{}' \;
+find $1 -iname *.so -exec rm -f '{}' \;
+

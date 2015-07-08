@@ -1,0 +1,59 @@
+###############################################################################
+#
+#  Robot Toolkit ++ (RTK++)
+#
+#  Copyright (c) 2007-2013 Shuhui Bu <bushuhui@nwpu.edu.cn>
+#  http://www.adv-ci.com
+#
+#  ----------------------------------------------------------------------------
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+###############################################################################
+
+TOPDIR := ..\..
+
+#inclue system configure
+include $(TOPDIR)/make.conf.win32
+
+src-all := $(wildcard *.cpp)
+obj-all := $(patsubst %.cpp,%.o,$(src-all))
+inc-all := $(wildcard *.h)
+bin-all := $(patsubst %.cpp,%.e,$(src-all))
+
+obj-all := windows/osa_cv_win.obj windows/osa_mq_win.obj windows/osa_semaphore_win.obj \
+           windows/osa_tm_win.obj windows/osa_event_win.obj \
+           windows/osa_mutex_win.obj windows/osa_thread_win.obj \
+           windows/osa_tsd_win.obj \
+           windows/osa_utils_win.obj \
+           _osa_in.obj osa_main.obj osa_mem.obj rtk_osa++.obj
+
+target := rtk_osa.lib
+
+
+all : $(target)
+
+$(target) : $(obj-all) $(inc-all)
+	$(AR) /OUT:$@ $(obj-all) 
+	$(CP) $(target) $(TOPDIR)\lib\win32\$(target)
+
+%.exe:%.cpp $(inc-y)
+	$(CXX) $< /out:$@ $(ALL_CFLAGS) $(ALL_LDFLAGS)
+
+%.obj:%.cpp
+	$(CXX) -c /Fo$@ $(ALL_CFLAGS) $<
+
+clean :
+	$(RM) *.exe *.obj *.lib *.dll windows\*.obj
+

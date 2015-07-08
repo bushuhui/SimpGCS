@@ -1,0 +1,51 @@
+################################################################################
+# compiler settings
+################################################################################
+CC=icc
+CXX=icpc
+AR=ar
+CP=cp
+RM=rm
+MOC=moc-qt4
+MAKE=make
+
+################################################################################
+# LIB settings
+################################################################################
+RTK_CFLAGS  = -D_GNU_SOURCE=1 -D_REENTRANT 
+RTK_INC     = -I$(TOPDIR)/include
+RTK_LDFLAGS = -L$(TOPDIR)/lib \
+              -lcairo -lSDL -ljpeg \
+              -lrtk_gui -lrtk_utils -lrtk_osa -lrtk_pr -lrtk_cv
+
+# if in debug mode
+#RTK_CFLAGS += -g -rdynamic
+# enable SSE4
+RTK_CFLAGS += -msse4
+# optimization
+RTK_CFLAGS += -O3
+
+################################################################################
+# OpenCV settings
+#   run: export PKG_CONFIG_PATH=/opt/OpenCV-2.4/lib/pkgconfig
+################################################################################
+OPENCV_CFLAGS  = $(shell pkg-config --cflags opencv)
+OPENCV_LDFLAGS = $(shell pkg-config --libs opencv)
+
+################################################################################
+# Qt settings
+################################################################################
+QT_CFLAGS  = -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED \
+             -I/usr/share/qt4/mkspecs/linux-g++ \
+             -I/usr/include/qt4/QtCore \
+             -I/usr/include/qt4/QtGui \
+             -I/usr/include/qt4
+QT_LDFLAGS = -lQtGui -lQtCore
+
+################################################################################
+# All settings
+################################################################################
+ALL_CFLAGS    = $(RTK_CFLAGS) $(RTK_INC) $(OPENCV_CFLAGS) $(QT_CFLAGS)
+ALL_LDFLAGS   = $(RTK_LDFLAGS) $(OPENCV_LDFLAGS)   $(QT_LDFLAGS) 
+ALL_MOC_FLAGS = $(RTK_INC) $(QT_CFLAGS)
+

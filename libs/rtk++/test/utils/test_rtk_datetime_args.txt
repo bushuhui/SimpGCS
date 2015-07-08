@@ -1,0 +1,186 @@
+--------------- 2014-10-14 18:59:00 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 19:05:56 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 19:07:52 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 19:08:31 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 19:12:11 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 19:12:28 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 19:13:52 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 19:18:22 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 19:53:00 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 19:56:07 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:02:06 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:02:49 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:03:23 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:14:00 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:14:54 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:16:15 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:23:08 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:23:59 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:25:53 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:26:32 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:26:53 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:42:25 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:43:22 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:44:18 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:45:09 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:47:48 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:50:00 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:51:08 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-10-14 20:55:37 ---------------
+./test_rtk_datetime.e -act test_currentDateTime 
+
+--------------- 2014-11-11 00:31:14 ---------------
+./test_rtk_datetime.e -act test_datetime_stream 
+
+--------------- 2014-11-11 00:31:41 ---------------
+./test_rtk_datetime.e -act test_datetime_stream 
+
+--------------- 2014-11-11 11:28:46 ---------------
+./test_rtk_datetime.e -act test_datetime_stream 
+
+--------------- 2014-11-11 16:48:53 ---------------
+./test_rtk_datetime.e -act test_datetime_stream 
+
+--------------- 2014-11-11 18:43:17 ---------------
+./test_rtk_datetime.e -act test_timeStamp 
+
+--------------- 2014-11-11 18:43:43 ---------------
+./test_rtk_datetime.e -act test_timeStamp 
+
+--------------- 2014-11-11 18:50:47 ---------------
+./test_rtk_datetime.e -act test_timeStamp 
+
+--------------- 2014-11-11 18:51:53 ---------------
+./test_rtk_datetime.e -act test_time_t 
+
+--------------- 2014-11-11 18:57:42 ---------------
+./test_rtk_datetime.e -act test_time_t 
+
+--------------- 2014-11-11 18:58:05 ---------------
+./test_rtk_datetime.e -act test_timeStamp 
+
+--------------- 2014-11-11 18:58:21 ---------------
+./test_rtk_datetime.e -act test_timeStamp 
+
+--------------- 2014-11-11 18:58:40 ---------------
+./test_rtk_datetime.e -act test_timeStamp 
+
+--------------- 2014-11-11 19:01:13 ---------------
+./test_rtk_datetime.e -act test_timeStamp 
+
+--------------- 2014-11-11 19:01:57 ---------------
+./test_rtk_datetime.e -act test_timeStamp 
+
+--------------- 2014-11-11 19:02:47 ---------------
+./test_rtk_datetime.e -act test_time_t 
+
+--------------- 2014-11-11 19:05:05 ---------------
+./test_rtk_datetime.e -act test_time_t 
+
+--------------- 2014-11-11 19:06:05 ---------------
+./test_rtk_datetime.e -act test_time_t 
+
+--------------- 2014-11-11 19:10:41 ---------------
+./test_rtk_datetime.e -act test_timeStamp 
+
+--------------- 2014-11-12 17:27:15 ---------------
+./test_rtk_datetime.e -act test_time_t 
+
+--------------- 2014-11-12 17:33:00 ---------------
+./test_rtk_datetime.e -act test_time_t 
+
+--------------- 2014-11-12 17:36:17 ---------------
+./test_rtk_datetime.e -act test_time_t 
+
+--------------- 2014-11-12 17:37:43 ---------------
+./test_rtk_datetime.e -act test_time_t 
+
+--------------- 2014-11-12 17:37:49 ---------------
+./test_rtk_datetime.e -act test_time_t 
+
+--------------- 2014-11-12 17:37:51 ---------------
+./test_rtk_datetime.e -act test_time_t 
+
+--------------- 2014-11-12 17:37:58 ---------------
+./test_rtk_datetime.e -act test_time_t 
+
+--------------- 2014-11-12 17:37:59 ---------------
+./test_rtk_datetime.e -act test_time_t 
+
+--------------- 2014-11-12 17:38:01 ---------------
+./test_rtk_datetime.e -act test_time_t 
+
+--------------- 2014-11-12 17:38:03 ---------------
+./test_rtk_datetime.e -act test_time_t 
+
+--------------- 2014-11-12 17:39:15 ---------------
+./test_rtk_datetime.e -act test_time_t 
+
+--------------- 2014-11-12 17:40:12 ---------------
+./test_rtk_datetime.e -act test_timeStamp 
+
+--------------- 2014-11-12 17:41:21 ---------------
+./test_rtk_datetime.e -act test_timeStamp 
+
+--------------- 2014-11-12 17:41:48 ---------------
+./test_rtk_datetime.e -act test_timeStamp 
+
+--------------- 2014-11-12 17:45:21 ---------------
+./test_rtk_datetime.e -act test_timeStamp 
+

@@ -1,0 +1,21 @@
+--------------- 2013-03-14 11:43:01 ---------------
+./test_rtk_string.e -act test_string_sort 
+
+--------------- 2014-10-13 15:55:10 ---------------
+./test_rtk_string.e -act test_string_split 
+
+--------------- 2014-10-13 15:55:40 ---------------
+./test_rtk_string.e -act test_string_split 
+
+--------------- 2014-10-13 15:56:04 ---------------
+./test_rtk_string.e -act test_string_split 
+
+--------------- 2014-10-13 16:18:25 ---------------
+./test_rtk_string.e -act test_string_split 
+
+--------------- 2014-10-13 16:21:27 ---------------
+./test_rtk_string.e -act test_string_split 
+
+--------------- 2014-10-13 16:23:11 ---------------
+./test_rtk_string.e -act test_string_split 
+

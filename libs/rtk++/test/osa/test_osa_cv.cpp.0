@@ -1,0 +1,51 @@
+
+
+#include <stdio.h>
+ 
+#include "rtk_osa.h"
+#include "rtk_test_module.h"
+
+using namespace rtk;
+
+extern osa_test_all(void);
+extern int osa_test_cv1(void);
+
+int osa_test_cv(void);
+OSA_RESULT _osa_test_cv_Event(OSA_InputEvent_t *ev);
+int osa_test_cv_Print(void);
+
+int osa_test_cv(void)
+{
+    osa_test_cv_Print();
+    osa_ev_registerInputEventHandler(_osa_test_cv_Event);
+
+	return 0;
+}
+
+OSA_RESULT _osa_test_cv_Event(OSA_InputEvent_t *ev)
+{
+	switch(ev->code) {
+	case OSA_VK_1:
+        osa_test_cv1();
+		break;
+			
+	case OSA_VK_COLOR_KEY_0:
+        osa_test_all();
+		break;
+	}
+
+	return 0;
+}
+
+int osa_test_cv_Print(void)
+{
+	test_db("********************************************************\n");
+	test_db("	Test PLOSA Condition Variable\n");
+	test_db("********************************************************\n");
+    test_db("1. osa_test_cv1(), basic functionality test\n");
+	test_db("CLKEY0: Exit\n");
+
+	return 0;
+}
+
+

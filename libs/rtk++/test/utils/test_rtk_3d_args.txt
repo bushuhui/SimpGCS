@@ -1,0 +1,6 @@
+--------------- 2013-07-26 21:05:28 ---------------
+./test_rtk_3d.e -act test_geodesic_distance 
+
+--------------- 2013-07-26 21:10:20 ---------------
+./test_rtk_3d.e -act test_geodesic_distance -fname b236.off 
+

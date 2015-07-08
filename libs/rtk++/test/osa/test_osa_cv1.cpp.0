@@ -1,0 +1,249 @@
+
+#include <stdio.h>
+ 
+#include "rtk_osa.h"
+#include "rtk_test_module.h"
+
+using namespace rtk;
+
+int osa_test_cv1(void);
+static uint32 _thread1_proc(uint32 arg);
+
+static uint32 _thread1_proc(uint32 arg)
+{
+	OSA_RESULT res;
+	OSA_BOOL 
+    AC_BOOL islocked;
+
+    if((mu_err = ac_mu_lock(ac_test_cv1_mutex, AC_MU_WAIT, 0)) != AC_MU_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_mu_lock, err = %d\n", mu_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    // Wait condition variable (CV signal will wake up this function)
+    if((cv_err = ac_cv_wait(ac_test_cv1_cvid, ac_test_cv1_mutex, 0)) != AC_CV_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_cv_wait, err = %d\n", cv_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    // Check Mutex status - It must be locked
+    if((mu_err = ac_mu_isLocked(ac_test_cv1_mutex, &islocked)) != AC_MU_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_mu_isLocked, err = %d\n", mu_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    if(islocked != AC_TRUE)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_mu_isLocked, islocked must be AC_TRUE\n");
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    // Wait condition variable (CV broadcast will wake up this function)
+    if((cv_err = ac_cv_wait(ac_test_cv1_cvid, ac_test_cv1_mutex, 0)) != AC_CV_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_cv_wait, err = %d\n", cv_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    // Check Mutex status - It must be locked
+    if((mu_err = ac_mu_isLocked(ac_test_cv1_mutex, &islocked)) != AC_MU_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_mu_isLocked, err = %d\n", mu_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    if(islocked != AC_TRUE)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_mu_isLocked, islocked must be AC_TRUE\n");
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    if((cv_err = ac_cv_wait(ac_test_cv1_cvid, ac_test_cv1_mutex, 100)) != AC_CV_TIMEOUT)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_cv_wait, err = %d\n", cv_err);
+        ac_test_printf((AC_CHAR8*)"[MSG 1]       : AC_CV_TIMEOUT(%d) must be returned\n", AC_CV_TIMEOUT);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    // Check Mutex status - It must be locked
+    if((mu_err = ac_mu_isLocked(ac_test_cv1_mutex, &islocked)) != AC_MU_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_mu_isLocked, err = %d\n", mu_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    if(islocked != AC_TRUE)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_mu_isLocked, islocked must be AC_TRUE\n");
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    if((mu_err = ac_mu_unlock(ac_test_cv1_mutex)) != AC_MU_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_mu_unlock, err = %d\n", mu_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    if((mu_err = ac_mu_delete(ac_test_cv1_mutex)) != AC_MU_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_mu_delete, err = %d\n", mu_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    if((cv_err = ac_cv_delete(ac_test_cv1_cvid)) != AC_CV_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_cv_delete, err = %d\n", cv_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    ac_test_cv1_data = AC_TRUE;
+}
+
+void ac_test_cv1(void)
+{
+    AC_T_ERROR err;
+    AC_CV_ERROR cv_err;
+    AC_MU_ERROR mu_err;
+    AC_THREAD tid;
+
+    ac_test_printf((AC_CHAR8*)"[Function]    : ac_test_cv1()\n");
+    ac_test_non_auto_printf((AC_CHAR8*)"[Description] : To test the basic functinality of condition variable\n");
+
+    ac_test_cv1_data = AC_FALSE;
+
+    if((mu_err = ac_mu_create(AC_MU_NORECURSIVE | AC_MU_FIFO, &ac_test_cv1_mutex)) != AC_MU_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_mu_create, err = %d\n", mu_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    if((cv_err = ac_cv_create(AC_CV_FIFO, &ac_test_cv1_cvid)) != AC_CV_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_cv_create, err = %d\n", cv_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    if((err = ac_t_create(200, AC_TEST_THREAD_STACK_SIZE, AC_TEST_THREAD_MODE, (AC_T_FUNCPTR)ac_test_cv1_entry, 0, &tid)) != AC_T_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_t_create, err = %d\n", err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    // Wait for thread operation
+    if((err = ac_t_sleep(1000)) != AC_T_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_t_sleep, err = %d\n", err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    // First CV signal
+    if((mu_err = ac_mu_lock(ac_test_cv1_mutex, AC_MU_WAIT, 0)) != AC_MU_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_mu_lock, err = %d\n", mu_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+    if((cv_err = ac_cv_signal(ac_test_cv1_cvid)) != AC_CV_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_cv_signal, err = %d\n", cv_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+    if((mu_err = ac_mu_unlock(ac_test_cv1_mutex)) != AC_MU_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_mu_unlock, err = %d\n", mu_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    // Wait for thread operation
+    if((err = ac_t_sleep(500)) != AC_T_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_t_sleep, err = %d\n", err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    // Second CV signal (CV broadcast)
+    if((mu_err = ac_mu_lock(ac_test_cv1_mutex, AC_MU_WAIT, 0)) != AC_MU_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_mu_lock, err = %d\n", mu_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    if((cv_err = ac_cv_broadcast(ac_test_cv1_cvid)) != AC_CV_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_cv_broadcast, err = %d\n", cv_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    if((mu_err = ac_mu_unlock(ac_test_cv1_mutex)) != AC_MU_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_mu_unlock, err = %d\n", mu_err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    if((err=ac_t_sleep(2000))!=AC_T_SUCCESS)
+    {
+        ac_test_printf((AC_CHAR8*)"[ERROR]       : Fail at ac_t_sleep, err = %d\n", err);
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Fail\n");
+        ac_test_cv1_auto_mode = AC_FALSE;
+        return;
+    }
+
+    ac_t_kill(tid);
+    ac_t_delete(tid);
+
+    if(ac_test_cv1_data == AC_TRUE)
+        ac_test_printf((AC_CHAR8*)"[RESULT]      : Success\n");
+
+    ac_test_cv1_auto_mode = AC_FALSE;
+}
+
